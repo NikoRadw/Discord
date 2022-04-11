@@ -13,6 +13,8 @@ client.once('ready', () => {
 client.on("messageCreate", (message) => {
     if (message.content =="hola"){
         message.reply("hola, como estas?")
+    } else {
+        
     }
 });
 
