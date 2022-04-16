@@ -12,30 +12,48 @@ const client = new Discord.Client({
     ] 
 });
 
+let bot = {
+    client,
+    prefix: "n.",
+    owners: ["383633939786629120"]
+}
 
-client.once('ready', () => {
-    console.log("Missile Imbound");
-});
+client.commands = new Discord.Collection()
+client.events = new Discord.Collection()
 
-client.on("messageCreate", (message) => {
-    if (message.content =="hola"){
-        message.reply("hola, como estas?")
-    } else {
+client.loadEvents = (bot, reload) => require("./handlers/events")(bot, reload)
+client.loadCommands = (bot, reload) => require("./handlers/commands")(bot, reload)
+
+
+client.loadEvents(bot, false)
+client.loadCommands(bot, false)
+
+module.exports = bot
+
+
+// client.once('ready', () => {
+//     console.log("Missile Imbound");
+// });
+
+// client.on("messageCreate", (message) => {
+//     if (message.content =="hola"){
+//         message.reply("hola, como estas?")
+//     } else {
         
-    }
-});
+//     }
+// });
 
 
-const welcomeChannelID = "856030478138081290";
+// const welcomeChannelID = "678317014330376211";
 
 
-client.on("guildMemberAdd", async (member) => {
-    const img = await image(member)
-    member.guild.channels.cache.get(welcomeChannelID).send({
-        content:  `<@${member.id}> Bienvenid3, pasatela bien` ,
-        files: [img]
-    })
-})
+// client.on("guildMemberAdd", async (member) => {
+//     const img = await image(member)
+//     member.guild.channels.cache.get(welcomeChannelID).send({
+//         content:  `<@${member.id}> Bienvenid3, pasatela bien` ,
+//         files: [img]
+//     })
+// })
 
 
 
